@@ -1,0 +1,36 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow reading all documents
+    match /{document=**} {
+      allow read: if true;
+    }
+    
+    // Posts collection
+    match /posts/{postId} {
+      allow create: if request.auth != null;
+      allow update: if request.auth != null;
+      allow delete: if request.auth != null && request.auth.uid == resource.data.authorId;
+    }
+    
+    // Users collection - CRITICAL FOR AUTO-UPDATES
+    match /users/{userId} {
+      // Allow reading user profiles for everyone
+      allow read: if true;
+      
+      // Allow users to create their own profile (this is what makes signup work)
+      allow create: if request.auth != null && request.auth.uid == userId;
+      
+      // Allow users to update their own profile (this is what makes login updates work)
+      allow update: if request.auth != null && request.auth.uid == userId;
+      
+      // Allow users to delete their own profile
+      allow delete: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Test collection (for debugging)
+    match /test/{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
