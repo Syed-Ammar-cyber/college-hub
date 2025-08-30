@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/college-hub/static/css/main.94f4a502.css",
+    "main.js": "/college-hub/static/js/main.ffc53b65.js",
+    "index.html": "/college-hub/index.html",
+    "main.94f4a502.css.map": "/college-hub/static/css/main.94f4a502.css.map",
+    "main.ffc53b65.js.map": "/college-hub/static/js/main.ffc53b65.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.94f4a502.css",
+    "static/js/main.ffc53b65.js"
+  ]
+}
